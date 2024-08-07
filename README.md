@@ -24,7 +24,10 @@ $ helm plugin install https://github.com/databus23/helm-diff --version master
 
 The repo provides examples using multiple tools such as kubectl, helm etc. Please select the one that meets your deployment requirements.
 
-
+-----------
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install prometheus-operator prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace
 -----------
 
 besu-genesis/templates/: Templates for genesis block setup.
@@ -46,6 +49,13 @@ helm install validator-4 ./charts/besu-node --namespace besu --values ./values/v
 
 
 helm install rpc-1 ./charts/besu-node --namespace besu --values ./values/reader.yml
+
+----------------
+
+kubectl get pods -n besu
+
+
+kubectl get pods --all-namespaces
 
 ----------------
 
