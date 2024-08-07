@@ -16,7 +16,7 @@ postgresql:
 blockscout: # cpu dependent
   resources:
     cpuLimit: 0.7
-    cpuRequest: 0.5
+    cpuRequest: 0.1
     memLimit: "2G"
     memRequest: "1G"
   port: 4000

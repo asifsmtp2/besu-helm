@@ -24,10 +24,7 @@ $ helm plugin install https://github.com/databus23/helm-diff --version master
 
 The repo provides examples using multiple tools such as kubectl, helm etc. Please select the one that meets your deployment requirements.
 
------------
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm repo update
-helm install prometheus-operator prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace
+
 -----------
 
 besu-genesis/templates/: Templates for genesis block setup.
@@ -35,11 +32,16 @@ besu-node/templates/: Templates for deploying Besu nodes.
 blockscout/charts/: Sub-charts for Blockscout dependencies.
 blockscout/templates/: Templates for deploying Blockscout.
 explorer/templates/: Templates for deploying a blockchain explorer.
-
+----------------
 kubectl create namespace besu
 
 cd helm
+----------------
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install prometheus-operator prometheus-community/kube-prometheus-stack --namespace monitoring --create-namespace
 
+----------------
 helm install genesis ./charts/besu-genesis --namespace besu --create-namespace --values ./values/genesis-besu.yml
 
 helm install validator-1 ./charts/besu-node --namespace besu --values ./values/validator.yml
@@ -51,11 +53,9 @@ helm install validator-4 ./charts/besu-node --namespace besu --values ./values/v
 helm install rpc-1 ./charts/besu-node --namespace besu --values ./values/reader.yml
 
 ----------------
-
-kubectl get pods -n besu
-
-
-kubectl get pods --all-namespaces
+kubectl port-forward svc/besu-node-rpc-1 7545:8545 -n besu
+----------------
+>> besu-helm/smart_contracts$ npm install
 
 ----------------
 
